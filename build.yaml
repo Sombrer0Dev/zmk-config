@@ -1,6 +1,7 @@
 include:
   - board: seeeduino_xiao_ble
-    shield: totem_left
+    shield: totem_left rgbled_adapter
   - board: seeeduino_xiao_ble
-    shield: totem_right
-# there is no settingsreset (needed) for the XIAO
+    shield: totem_right rgbled_adapter
+  - board: seeeduino_xiao_ble
+    shield: settings_reset
