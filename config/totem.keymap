@@ -58,6 +58,15 @@
         };
     };
 
+    macros {
+        rus: rus {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp RG(SPACE) &to 3>;
+            label = "RUS";
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -162,6 +171,16 @@
         &bootloader  &bt BT_NXT  &trans        &trans  &trans    &trans  &kp F4  &kp F5  &kp F6  &kp F11
 &trans  &trans       &bt BT_PRV  &trans        &trans  &trans    &trans  &kp F1  &kp F2  &kp F3  &kp F10  &trans
                                  &trans        &trans  &trans    &trans  &trans  &trans
+            >;
+        };
+
+        russian_layer {
+            label = "RUS";
+            bindings = <
+       &kp Q       &kp W       &kp F        &kp P        &kp B      &kp J      &kp L          &kp U        &kp Y       &kp SEMI
+       &mt LGUI A  &mt LALT R  &mt LCTRL S  &mt LSHFT T  &kp G      &kp M      &mt RSHFT N    &mt RCTRL E  &mt RALT I  &mt RGUI O
+&kp Q  &kp Z       &kp X       &kp C        &kp D        &kp V      &kp K      &kp H          &kp COMMA    &kp DOT     &kp FSLH    &kp BSLH
+                               &kp DEL      &lt 1 SPACE  &kp TAB    &kp ENTER  &shift_delete  &kp BSPC
             >;
         };
 
