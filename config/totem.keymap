@@ -64,6 +64,17 @@
         };
     };
 
+    behaviors {
+        shift_delete: shift_delete {
+            compatible = "zmk,behavior-mod-morph";
+            label = "SHIFT_DELETE";
+            bindings = <&kp BACKSPACE>, <&kp DELETE>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -86,10 +97,10 @@
             //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
 
             bindings = <
-       &kp Q       &kp W       &kp F        &kp P        &kp B        &kp J    &kp L        &kp U        &kp Y       &kp SEMI
-       &mt LGUI A  &mt LALT R  &mt LCTRL S  &mt LSHFT T  &kp G        &kp M    &mt RSHFT N  &mt RCTRL E  &mt RALT I  &mt RGUI O
-&kp Q  &kp Z       &kp X       &kp C        &kp D        &kp V        &kp K    &kp H        &kp COMMA    &kp DOT     &kp FSLH    &kp BSLH
-                               &kp DEL      &lt NAV TAB  &kp SPACE    &kp RET  &lt SYM ESC  &kp BSPC
+       &kp Q       &kp W       &kp F        &kp P        &kp B        &kp J          &kp L        &kp U        &kp Y       &kp SEMI
+       &mt LGUI A  &mt LALT R  &mt LCTRL S  &mt LSHFT T  &kp G        &kp M          &mt RSHFT N  &mt RCTRL E  &mt RALT I  &mt RGUI O
+&kp Q  &kp Z       &kp X       &kp C        &kp D        &kp V        &kp K          &kp H        &kp COMMA    &kp DOT     &kp FSLH    &kp BSLH
+                               &kp DEL      &lt NAV TAB  &kp SPACE    &shift_delete  &lt SYM ESC  &kp BSPC
             >;
         };
 
