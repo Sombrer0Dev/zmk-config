@@ -157,6 +157,16 @@
             bindings = <&right_par>;
             key-positions = <17 18>;
         };
+
+        lbr_c {
+            bindings = <&left_br>;
+            key-positions = <27 28>;
+        };
+
+        rbr_c {
+            bindings = <&right_br>;
+            key-positions = <28 29>;
+        };
     };
 
     macros {
@@ -217,6 +227,24 @@
             compatible = "zmk,behavior-mod-morph";
             label = "RIGHT_PAR";
             bindings = <&kp RIGHT_PARENTHESIS>, <&kp GT>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_RSFT|MOD_LSFT)>;
+        };
+
+        left_br: left_br {
+            compatible = "zmk,behavior-mod-morph";
+            label = "LEFT_BR";
+            bindings = <&kp LEFT_BRACKET>, <&kp LEFT_BRACE>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_RSFT|MOD_LSFT)>;
+        };
+
+        right_br: right_br {
+            compatible = "zmk,behavior-mod-morph";
+            label = "RIGHT_BR";
+            bindings = <&kp RIGHT_BRACKET>, <&kp RIGHT_BRACE>;
 
             #binding-cells = <0>;
             mods = <(MOD_RSFT|MOD_LSFT)>;
