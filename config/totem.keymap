@@ -97,6 +97,56 @@
             bindings = <&kp K_PASTE>;
             key-positions = <23 24>;
         };
+
+        caret_c {
+            bindings = <&kp CARET>;
+            key-positions = <5 15>;
+        };
+
+        under_c {
+            bindings = <&kp UNDER>;
+            key-positions = <15 26>;
+        };
+
+        plus_c {
+            bindings = <&kp PLUS>;
+            key-positions = <6 16>;
+        };
+
+        minus_c {
+            bindings = <&kp MINUS>;
+            key-positions = <16 27>;
+        };
+
+        bspc_c {
+            bindings = <&kp BACKSPACE>;
+            key-positions = <6 7>;
+        };
+
+        del_c {
+            bindings = <&kp DEL>;
+            key-positions = <7 8>;
+        };
+
+        aster_c {
+            bindings = <&kp ASTERISK>;
+            key-positions = <7 17>;
+        };
+
+        slash_c {
+            bindings = <&kp SLASH>;
+            key-positions = <17 28>;
+        };
+
+        amp_c {
+            bindings = <&kp AMPS>;
+            key-positions = <8 18>;
+        };
+
+        pipe_c {
+            bindings = <&kp PIPE>;
+            key-positions = <29 18>;
+        };
     };
 
     macros {
