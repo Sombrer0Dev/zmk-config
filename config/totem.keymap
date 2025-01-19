@@ -39,8 +39,63 @@
         };
 
         ent_c {
-            bindings = <&kp LG(ENTER)>;
+            bindings = <&kp ENTER>;
             key-positions = <2 3>;
+        };
+
+        at_c {
+            bindings = <&kp AT>;
+            key-positions = <11 1>;
+        };
+
+        hash_c {
+            bindings = <&kp HASH>;
+            key-positions = <12 2>;
+        };
+
+        dollar_c {
+            bindings = <&kp DOLLAR>;
+            key-positions = <13 3>;
+        };
+
+        percent_c {
+            bindings = <&kp PERCENT>;
+            key-positions = <14 4>;
+        };
+
+        tab_c {
+            bindings = <&kp TAB>;
+            key-positions = <11 12>;
+        };
+
+        grave_c {
+            bindings = <&kp GRAVE>;
+            key-positions = <11 22>;
+        };
+
+        bslsh_c {
+            bindings = <&kp BSLH>;
+            key-positions = <23 12>;
+        };
+
+        eql_c {
+            bindings = <&kp EQUAL>;
+            key-positions = <13 24>;
+        };
+
+        tild_c {
+            bindings = <&kp TILDE>;
+            key-positions = <14 25>;
+        };
+
+        copy_c {
+            bindings = <&kp K_COPY>;
+            key-positions = <22 23>;
+        };
+
+        paste_c {
+            bindings = <&kp K_PASTE>;
+            key-positions = <23 24>;
         };
     };
 
