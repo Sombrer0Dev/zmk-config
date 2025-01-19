@@ -33,16 +33,14 @@
     combos {
         compatible = "zmk,combos";
 
-        combo_esc {
-            timeout-ms = <50>;
-            key-positions = <0 1>;
-            bindings = <&kp ESC>;
+        esc_c {
+            bindings = <&kp ESCAPE>;
+            key-positions = <1 2>;
         };
 
-        combo_tvp {
-            timeout-ms = <100>;
-            key-positions = <11 12 13>;
-            bindings = <&tog 0>;
+        ent_c {
+            bindings = <&kp LG(ENTER)>;
+            key-positions = <2 3>;
         };
     };
 
