@@ -11,9 +11,7 @@
 // ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 #include <behaviors.dtsi>
-#include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/outputs.h>
 
 #define BASE 0
 #define NAV  1
@@ -44,17 +42,6 @@
             timeout-ms = <100>;
             key-positions = <11 12 13>;
             bindings = <&tog 0>;
-        };
-    };
-
-    behaviors {
-        shift_delete: shift_delete {
-            compatible = "zmk,behavior-mod-morph";
-            label = "SHIFT_DELETE";
-            bindings = <&kp BACKSPACE>, <&kp DELETE>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
         };
     };
 
@@ -96,20 +83,20 @@
             //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
 
             bindings = <
-            &kp Q       &kp W       &kp F        &kp P        &kp B      &kp J      &kp L            &kp U        &kp Y       &kp SEMI
-            &mt LGUI A  &mt LALT R  &mt LCTRL S  &mt LSHFT T  &kp G      &kp M      &mt RSHFT N      &mt RCTRL E  &mt RALT I  &mt RGUI O
-&kp ESCAPE  &kp Z       &kp X       &kp C        &kp D        &kp V      &kp K      &kp H            &kp COMMA    &kp DOT     &kp FSLH    &kp SINGLE_QUOTE
-                                    &rus         &lt 2 SPACE  &kp TAB    &kp ENTER  &lt 3 BACKSPACE  &kp DELETE
+            &kp Q       &kp W       &kp F        &kp P        &kp B      &kp J        &kp L            &kp U        &kp Y       &kp SEMI
+            &mt LGUI A  &mt LALT R  &mt LCTRL S  &mt LSHFT T  &kp G      &kp M        &mt RSHFT N      &mt RCTRL E  &mt RALT I  &mt RGUI O
+&kp ESCAPE  &kp Z       &kp X       &kp C        &kp D        &kp V      &kp K        &kp H            &kp COMMA    &kp DOT     &kp FSLH    &kp SINGLE_QUOTE
+                                    &rus         &lt 2 SPACE  &kp TAB    &lt 4 ENTER  &lt 3 BACKSPACE  &kp DELETE
             >;
         };
 
         russian_layer {
             label = "RUS";
             bindings = <
-       &kp Q       &kp W       &kp E        &kp R        &kp T      &kp Y      &kp U          &kp I        &kp O       &kp P
-       &mt LGUI A  &mt LALT S  &mt LCTRL D  &mt LSHFT F  &kp G      &kp H      &mt RSHFT J    &mt RCTRL K  &mt RALT L  &mt RGUI SEMICOLON
-&kp Q  &kp Z       &kp X       &kp C        &kp V        &kp B      &kp N      &kp M          &kp COMMA    &kp DOT     &kp FSLH            &kp SQT
-                               &eng         &lt 3 SPACE  &kp TAB    &kp ENTER  &shift_delete  &kp BSPC
+            &kp Q       &kp W       &kp E        &kp R        &kp T      &kp Y        &kp U            &kp I        &kp O       &kp P
+            &mt LGUI A  &mt LALT S  &mt LCTRL D  &mt LSHFT F  &kp G      &kp H        &mt RSHFT J      &mt RCTRL K  &mt RALT L  &mt RGUI SEMICOLON
+&kp ESCAPE  &kp Z       &kp X       &kp C        &kp V        &kp B      &kp N        &kp M            &kp COMMA    &kp DOT     &kp FSLH            &kp SQT
+                                    &eng         &lt 2 SPACE  &kp TAB    &lt 4 ENTER  &lt 3 BACKSPACE  &kp DELETE
             >;
         };
 
@@ -133,7 +120,7 @@
         &none         &none         &none          &none      &none      &kp K_REDO    &kp K_PASTE     &kp K_COPY     &kp K_CUT     &kp K_UNDO
         &kp LEFT_WIN  &kp LEFT_ALT  &kp RA(LCTRL)  &kp LSHFT  &none      &kp CAPSLOCK  &kp LEFT_ARROW  &kp DOWN       &kp UP_ARROW  &kp RIGHT
 &trans  &none         &none         &none          &none      &none      &kp INSERT    &kp HOME        &kp PAGE_DOWN  &kp PG_UP     &kp END     &none
-                                    &none          &kp SPACE  &kp TAB    &kp ENTER     &shift_delete   &none
+                                    &none          &kp SPACE  &kp TAB    &kp ENTER     &none           &none
             >;
         };
 
@@ -154,17 +141,17 @@
             //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
 
             bindings = <
-        &none                  &none                  &none               &none                &none        &kp J  &none         &none         &none        &none
-        &mt LEFT_WIN NUMBER_1  &mt LEFT_ALT NUMBER_2  &mt LCTRL NUMBER_3  &mt LSHIFT NUMBER_4  &kp LS(G)    &none  &mt RSHFT N7  &mt RCTRL N8  &mt LALT N9  &mt LGUI N0
-&trans  &none                  &none                  &none               &kp N5               &none        &kp K  &kp NUMBER_6  &none         &none        &none        &trans
-                                                      &trans              &trans               &trans       &mo 4  &kp KP_N0     &trans
+        &kp LEFT_BRACKET  &kp N7  &kp N8      &kp N9        &kp RIGHT_BRACKET    &none  &none      &none      &none     &none
+        &kp SEMICOLON     &kp N4  &kp N5      &kp NUMBER_6  &kp EQUAL            &none  &kp RSHFT  &kp RCTRL  &kp LALT  &kp LGUI
+&trans  &kp GRAVE         &kp N1  &kp N2      &kp NUMBER_3  &kp BACKSLASH        &none  &none      &none      &none     &none     &none
+                                  &kp PERIOD  &kp N0        &kp MINUS            &none  &none      &none
             >;
         };
 
-        adjust_layer {
+        sym_layer {
             // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 
-            label = "ADJ";
+            label = "SYM";
 
             // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
             //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
@@ -178,10 +165,10 @@
             //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
 
             bindings = <
-        &sys_reset   &bt BT_CLR  &out OUT_TOG  &trans  &trans    &trans  &kp F7  &kp F8  &kp F9  &kp F12
-        &bootloader  &bt BT_NXT  &trans        &trans  &trans    &trans  &kp F4  &kp F5  &kp F6  &kp F11
-&trans  &trans       &bt BT_PRV  &trans        &trans  &trans    &trans  &kp F1  &kp F2  &kp F3  &kp F10  &trans
-                                 &trans        &trans  &trans    &trans  &trans  &trans
+        &kp LEFT_BRACE  &kp AMPS    &kp ASTRK             &kp LEFT_PARENTHESIS   &kp RIGHT_BRACE    &none  &none      &none      &none          &none
+        &kp COLON       &kp DOLLAR  &kp PERCENT           &kp CARET              &kp PLUS           &none  &kp RSHFT  &kp RCTRL  &kp RIGHT_ALT  &kp RGUI
+&trans  &kp TILDE       &kp EXCL    &kp AT                &kp HASH               &kp PIPE           &none  &none      &none      &none          &none     &trans
+                                    &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp UNDERSCORE     &none  &none      &none
             >;
         };
 
