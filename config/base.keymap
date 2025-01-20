@@ -95,6 +95,7 @@ MASK_MODS(masked_end,  (MOD_LCTL), &kp END)
 
 // Tap: num-word | double-tap: sticky num-layer | Hold: num-layer.
 #define SMART_NUM &smart_num NUM 0
+#define SMART_NUM_R &smart_num NUM 1
 ZMK_HOLD_TAP(smart_num, bindings = <&mo>, <&num_dance>; flavor = "balanced";
              tapping-term-ms = <200>; quick-tap-ms = <QUICK_TAP_MS>;)
 ZMK_TAP_DANCE(num_dance, bindings = <&num_word NUM>, <&sl NUM>;
@@ -170,7 +171,7 @@ ZMK_LAYER(Rus,
 //┏━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┓
    &kp ESC       &kp Z         &kp X         &kp C         &kp V         &kp B        ,    &kp N         &kp M         &kp COMMA     &kp DOT       &qexcl        &kp SQT      ,
 //┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
-                                             &eng          &lt_spc NAV 1 &lt fn TAB   ,    SMART_NUM     &kp RET       &bs_del
+                                             &eng          &lt_spc NAV 1 &lt fn TAB   ,    SMART_NUM_R   &kp RET       &bs_del
 //                                          ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
 )
 
