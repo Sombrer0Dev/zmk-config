@@ -9,10 +9,10 @@
 */
 
 #define COMBO_TERM_FAST 20
-#define COMBO_TERM_SLOW 80
+#define COMBO_TERM_SLOW 60
 
 #define COMBO_IDLE_FAST 150
-#define COMBO_IDLE_SLOW 100
+#define COMBO_IDLE_SLOW 50
 
 /* Horizontal combos - left hand */
 ZMK_COMBO(esc,   &kp ESC,      LT3 LT2,     DEF RUS NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST)
@@ -22,7 +22,7 @@ ZMK_COMBO(grave, &kp GRAVE,    LT4 LT3,     DEF RUS NAV NUM, COMBO_TERM_SLOW, CO
 // chording of mods. Custom hold-tap instances can be bootstrapped on the go using the
 // 8-argument version of ZMK_COMBO defined in base.keymap.
 ZMK_COMBO(tab,   &hml LS(LALT)TAB, LM3 LM2, DEF RUS NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST)
-ZMK_COMBO(bslh,  &kp BSLH,     LM4 LB3,     DEF RUS NAV NUM, COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
+ZMK_COMBO(bslh,  &kp BSLH,     LM4 LM3,     DEF RUS NAV NUM, COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
 ZMK_COMBO(equal, &kp EQUAL,    LM2 LM1,     DEF RUS NAV NUM, COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
 
 ZMK_COMBO(tilde, &kp TILDE,    LB4 LB3,     DEF RUS NAV NUM, COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
