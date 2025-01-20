@@ -49,7 +49,7 @@
 
 #define MAKE_HRM(NAME, HOLD, TAP, TRIGGER_POS)                                 \
   ZMK_HOLD_TAP(NAME, bindings = <HOLD>, <TAP>; flavor = "balanced";            \
-               tapping-term-ms = <280>; quick-tap-ms = <QUICK_TAP_MS>;         \
+               tapping-term-ms = <200>; quick-tap-ms = <QUICK_TAP_MS>;         \
                require-prior-idle-ms = <150>; hold-trigger-on-release;         \
                hold-trigger-key-positions = <TRIGGER_POS>;)
 
@@ -123,6 +123,9 @@ SIMPLE_MORPH(rpar_gt, SFT, &kp RPAR, &kp GT)
 // Tap: colon | Shift + tap: semi.
 SIMPLE_MORPH(colon, SFT, &kp COLON, &kp SEMI)
 
+// Tap: slash | Shift + tap: back slash.
+SIMPLE_MORPH(dslh, SFT, &kp FSLH, &kp BSLH)
+
 // Tap: space | Shift + tap: dot -> space -> sticky shift | Hold: layer.
 ZMK_HOLD_TAP(lt_spc, bindings = <&mo>, <&spc_morph>; flavor = "balanced";
              tapping-term-ms = <200>; quick-tap-ms = <QUICK_TAP_MS>;)
@@ -167,7 +170,7 @@ ZMK_BASE_LAYER(Base,
 //┏━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┓
    &kp ESC       &kp Z         &kp X         &kp C         &kp D         &kp V        ,    &kp K         &kp H         &kp COMMA     &kp DOT       &qexcl        &kp SQT      ,
 //┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
-                                             &rus          &lt NAV TAB  &lt_spc FN 0  ,    SMART_NUM     &lt SYM RET   &smart_shft
+                                             &rus          &lt_spc FN 0  &lt NAV TAB  ,    SMART_NUM     &lt SYM RET   &smart_shft
 //                                          ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
 )
 
@@ -179,7 +182,7 @@ ZMK_BASE_LAYER(Rus,
 //┏━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┓
    &kp ESC       &kp Z         &kp X         &kp C         &kp V         &kp B        ,    &kp N         &kp M         &kp COMMA     &kp DOT       &qexcl        &kp SQT      ,
 //┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
-                                             &rus          &lt NAV TAB  &lt_spc FN 0  ,    SMART_NUM     &lt SYM RET   &smart_shft
+                                             &rus          &lt_spc FN 0  &lt NAV TAB  ,    SMART_NUM     &lt SYM RET   &smart_shft
 //                                          ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
 )
 
