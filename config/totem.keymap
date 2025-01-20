@@ -11,321 +11,231 @@
 // ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 #include <behaviors.dtsi>
-#include <dt-bindings/zmk/bt.h>
+#include <behaviors/num_word.dtsi> // Requires auto-layer module.
 #include <dt-bindings/zmk/keys.h>
 
+// BLUETOOTH
+#include <dt-bindings/zmk/bt.h>
+#define _BT_SEL_KEYS_                                                        \
+    &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR
+
 #include "zmk-helpers/helper.h"
-// Source desired key-position labels
 #include "zmk-helpers/key-labels/totem.h"
 
+#define DEF 0
+#define NAV 1
+#define FN 2
+#define NUM 3
+#define SYS 4
 
-/*                                      38 KEY MATRIX / LAYOUT MAPPING
+#define XXX &none
+#define ___ &trans
 
-    ╭────────────────────┬────────────────────╮        ╭──────────────────────┬─────────────────────╮
-    │  0   1   2   3   4 │  5   6   7   8   9 │        │  LT4 LT3 LT2 LT1 LT0 │ RT0 RT1 RT2 RT3 RT4 │
- ╭──╯ 10  11  12  13  14 │ 15  16  17  18  19 ╰───╮ ╭──╯  LM4 LM3 LM2 LM1 LM0 │ RM0 RM1 RM2 RM3 RM4 ╰───╮
- │ 20 21  22  23  24  25 │ 26  27  28  29  30  31 │ │ LB5 LB4 LB3 LB2 LB1 LB0 │ RB0 RB1 RB2 RB3 RB4 RB5 │
- ╰──────────╮ 32  33  34 │ 35  36  37 ╭───────────╯ ╰──────────╮  LH2 LH1 LH0 │ RH0 RH1 RH2 ╭───────────╯
-            ╰────────────┴────────────╯                        ╰──────────────┴─────────────╯
-*/
+/* Global defaults */
+
+#define QUICK_TAP_MS 175
+
+&sk {
+  release-after-ms = <900>;
+  quick-release;
+};
+
+&sl { // Allow sticky mods to chord across sticky layers.
+  ignore-modifiers;
+};
+
+&lt {
+  flavor = "balanced";
+  tapping-term-ms = <200>;
+  quick-tap-ms = <QUICK_TAP_MS>;
+};
+
+
+/* Homerow mods */
+
 #define KEYS_L LT0 LT1 LT2 LT3 LT4 LM0 LM1 LM2 LM3 LM4 LB0 LB1 LB2 LB3 LB4 LB5
 #define KEYS_R RT0 RT1 RT2 RT3 RT4 RM0 RM1 RM2 RM3 RM4 RB0 RB1 RB2 RB3 RB4 RB5
 #define THUMBS LH0 LH1 LH2 RH0 RH1 RH2
 
-&mt {
-    quick-tap-ms = <175>;
-    flavor = "balanced";
-    tapping-term-ms = <280>;
-    require-prior-idle-ms = <150>;
-    hold-trigger-on-release;
-};
+#define MAKE_HRM(NAME, HOLD, TAP, TRIGGER_POS)                                 \
+  ZMK_HOLD_TAP(NAME, bindings = <HOLD>, <TAP>; flavor = "balanced";            \
+               tapping-term-ms = <280>; quick-tap-ms = <QUICK_TAP_MS>;         \
+               require-prior-idle-ms = <150>; hold-trigger-on-release;         \
+               hold-trigger-key-positions = <TRIGGER_POS>;)
 
-//             ┃     Q     ┃     W     ┃     F     ┃     P     ┃     G     ┃   ┃     J     ┃     L     ┃     U     ┃     Y     ┃     ;     ┃
-//             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
-//             ┃     A     ┃     R     ┃     S     ┃     T     ┃     D     ┃   ┃     H     ┃     N     ┃     E     ┃     I     ┃     O     ┃
-// ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃     Q     ┃     Z     ┃     X     ┃     C     ┃     V     ┃     B     ┃   ┃     K     ┃     M     ┃     ,     ┃     .     ┃     /     ┃     \     ┃
-// ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                     ┃    DEL    ┃    TAB    ┃    SPC    ┃   ┃   ENTER   ┃           ┃   BSPC    ┃
-//                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
-ZMK_LAYER(default,
+MAKE_HRM(hml, &kp, &kp, KEYS_R THUMBS) // Left-hand HRMs.
+MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS) // Right-hand HRMs.
+
+// Hack: Make HRM combos tap-only (cf, ZMK issue #544).
+#define ZMK_COMBO_8(NAME, TAP, POS, LAYERS, COMBO_MS, IDLE_MS, HOLD, SIDE)     \
+  MAKE_HRM(hm_combo_##NAME, &kp, TAP, SIDE THUMBS)                             \
+  ZMK_COMBO_6(NAME, &hm_combo_##NAME HOLD 0, POS, LAYERS, COMBO_MS, IDLE_MS)
+
+
+#include "combos.dtsi" // Must be sourced after HRM-combo hack.
+#include "leader.dtsi"
+
+/* Nav cluster */
+
+// Trigger tap-action on all interrupts.
+#define MT_CORE                                                                \
+  flavor = "tap-preferred";                                                    \
+  tapping-term-ms = <220>;                                                     \
+  quick-tap-ms = <220>;                                                        \
+  hold-trigger-key-positions = <0>;
+
+&mt { MT_CORE };
+
+ZMK_HOLD_TAP(mt_home, bindings = <&masked_home>, <&kp>; MT_CORE)
+ZMK_HOLD_TAP(mt_end, bindings = <&masked_end>, <&kp>; MT_CORE)
+
+#define NAV_LEFT  &mt_home 0   LEFT  // Tap: left  | Long-tap: start of line.
+#define NAV_RIGHT &mt_end 0    RIGHT // Tap: right | Long-tap: end   of line.
+#define NAV_UP    &mt LC(HOME) UP    // Tap: up    | Long-tap: start of doc.
+#define NAV_DOWN  &mt LC(END)  DOWN  // Tap: down  | Long-tap: end   of doc.
+#define NAV_BSPC  &mt LC(BSPC) BSPC  // Tap: bspc  | Long-tap: delete word bwd.
+#define NAV_DEL   &mt LC(DEL)  DEL   // Tap: del   | Long-tap: delete word fwd.
+
+// Mask CTRL on left/right hold to avoid accidental jumps to start/end of doc.
+#define MASK_MODS(NAME, MODS, BINDING)                                         \
+  ZMK_MOD_MORPH(NAME, bindings = <BINDING>, <BINDING>; mods = <MODS>;)
+
+MASK_MODS(masked_home, (MOD_LCTL), &kp HOME)
+MASK_MODS(masked_end,  (MOD_LCTL), &kp END)
+
+/* Auto-layers */
+
+// Tap: num-word | double-tap: sticky num-layer | Hold: num-layer.
+#define SMART_NUM &smart_num NUM 0
+ZMK_HOLD_TAP(smart_num, bindings = <&mo>, <&num_dance>; flavor = "balanced";
+             tapping-term-ms = <200>; quick-tap-ms = <QUICK_TAP_MS>;)
+ZMK_TAP_DANCE(num_dance, bindings = <&num_word NUM>, <&sl NUM>;
+              tapping-term-ms = <200>;)
+
+
+// Define mod-morph with a *single* mod trigger for less repetition.
+#define SIMPLE_MORPH(NAME, MOD, BINDING1, BINDING2)                            \
+  ZMK_MOD_MORPH(NAME, mods = <(MOD_L##MOD | MOD_R##MOD)>;                      \
+                bindings = <BINDING1>, <BINDING2>;)
+
+// Tap: qmark | Shift + tap: excl.
+SIMPLE_MORPH(qexcl, SFT, &kp QMARK, &kp EXCL)
+
+// Tap: left/right parenthesis | Shft + tap: less-than/greater-than.
+SIMPLE_MORPH(lpar_lt, SFT, &kp LPAR, &kp LT)
+SIMPLE_MORPH(rpar_gt, SFT, &kp RPAR, &kp GT)
+
+// Tap: space | Shift + tap: dot -> space -> sticky shift | Hold: nav layer.
+ZMK_HOLD_TAP(lt_spc, bindings = <&mo>, <&spc_morph>; flavor = "balanced";
+             tapping-term-ms = <200>; quick-tap-ms = <QUICK_TAP_MS>;)
+SIMPLE_MORPH(spc_morph, SFT, &kp SPACE, &dot_spc)
+ZMK_MACRO(dot_spc, bindings = <&kp DOT &kp SPACE &sk LSHFT>; wait-ms = <0>;
+          tap-ms = <5>;)
+
+// Tap: backspace | Lshft + tap: delete | Rshft + tap: shift-delete.
+ZMK_MOD_MORPH(bs_del, bindings = <&kp BSPC>, <&kp DEL>;
+              mods = <(MOD_LSFT|MOD_RSFT)>; keep-mods = <MOD_RSFT>;)
+
+// Tap: copy | double-tap: cut.
+ZMK_TAP_DANCE(copy_cut, bindings = <&kp LC(INS)>, <&kp LC(X)>;
+              tapping-term-ms = <200>;)
+
+// Sticky shift + leader.
+ZMK_MACRO(leader_sft, bindings = <&sk LSHFT &leader>;)
+
+// Misc aliases. [TODO: clean up]
+#define CANCEL    &kp K_CANCEL            // Cancel caps-word & auto-layers.
+#define DSK_PREV  &hmr LCTRL LG(LC(LEFT)) // Previous desktop.
+#define DSK_NEXT  &hmr LALT LG(LC(RIGHT)) // Next     desktop.
+#define PIN_WIN   &kp LG(LC(LS(Q)))       // Pin window across desktops.
+#define PIN_APP   &kp LG(LC(LS(A)))       // Pin application across desktops.
+#define DSK_MGR   &kp LA(GRAVE)           // Desktop manager.
+#define VOL_DOWN  &hmr RSHFT C_VOL_DN
+
+/* Russian language*/
+ZMK_MACRO(rus, bindings = <&kp LG(SPACE) &to 0>;)
+ZMK_MACRO(eng, bindings = <&kp LG(SPACE) &to 1>;)
+
+/* Keymap */
+
+ZMK_CONDITIONAL_LAYER(sys, FN NUM, SYS) // FN + NUM --> SYS.
+
+#ifndef ZMK_BASE_LAYER
+  #define ZMK_BASE_LAYER(name, LT, RT, LM, RM, LB, RB, LH, RH)                 \
+      ZMK_LAYER(name, LT RT LM RM LB RB LH RH)
+#endif
+
+ZMK_BASE_LAYER(Base,
 //              ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
-                 &kp Q         &kp W         &kp F         &kp P         &kp B             &kp J         &kp L         &kp U         &kp Y         &kp SEMI
+                 &kp Q         &kp W         &kp F         &kp P         &kp B        ,    &kp J         &kp L         &kp U         &kp Y         &kp SEMI     ,
 //              ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫
-                 &hrml LGUI A  &hrml LALT R  &hrml LCTRL S &hrml LSHFT T &kp G             &kp M         &hrmr RSHFT N &hrmr RCTRL E &hrmr RALT I  &hrmr RGUI O
+                 &hml LGUI A   &hml LALT R   &hml LCTRL S  &hml LSHFT T  &kp G        ,    &kp M         &hmr RSHFT N  &hmr RCTRL E  &hmr RALT I   &hmr RGUI O  ,
 //┏━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┓
-   &kp ESC       &lt 7 Z       &kp X         &kp C         &kp D         &kp V             &kp K         &kp H         &kp COMMA     &kp DOT       &lt 7 FSLH    &kp SQT
+   &kp ESC       &kp Z         &kp X         &kp C         &kp D         &kp V        ,    &kp K         &kp H         &kp COMMA     &kp DOT       &lt 7 FSLH    &kp SQT      ,
 //┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
-                                             &rus          &lt 2 SPACE   &lt 5 TAB         &lt 4 RET     &lt 3 BSPC    &lt 6 DEL
+                                             &rus          &lt_spc NAV 0 &lt fn TAB   ,    SMART_NUM     &kp RET       &bs_del
 //                                          ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
 )
 
-ZMK_LAYER(rus,
+ZMK_LAYER(Rus,
 //              ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
-                 &kp Q         &kp W         &kp E         &kp R         &kp T             &kp Y         &kp U         &kp I         &kp O         &kp P
+                 &kp Q         &kp W         &kp E         &kp R         &kp T        ,    &kp Y         &kp U         &kp I         &kp O         &kp P        ,
 //              ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫
-                 &hrml LGUI A  &hrml LALT S  &hrml LCTRL D &hrml LSHFT F &kp G             &kp H         &hrmr RSHFT J &hrmr RCTRL K &hrmr RALT L  &hrmr RGUI SEMI
+                 &hml LGUI A   &hml LALT S   &hml LCTRL D  &hml LSHFT F  &kp G        ,    &kp H         &hmr RSHFT J  &hmr RCTRL K  &hmr RALT L   &hmr RGUI SEMI,
 //┏━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┓
-   &kp ESC       &kp Z         &kp X         &kp C         &kp V         &kp B             &kp N         &kp M         &kp COMMA     &kp DOT       &kp FSLH      &kp SQT
+   &kp ESC       &kp Z         &kp X         &kp C         &kp V         &kp B        ,    &kp N         &kp M         &kp COMMA     &kp DOT       &kp FSLH      &kp SQT      ,
 //┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
-                                             &eng          &lt 2 SPACE   &lt 5 TAB         &lt 4 RET     &lt 3 BSPC    &lt 6 DEL
+                                             &eng          &lt_spc NAV 0 &lt fn TAB   ,    SMART_NUM     &kp RET       &bs_del
 //                                          ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
 )
-ZMK_LAYER(nav,
-        &none         &none         &none          &none      &none    &kp K_REDO    &kp K_PASTE     &kp K_COPY     &kp K_CUT     &kp K_UNDO
-        &kp LEFT_WIN  &kp LEFT_ALT  &kp RA(LCTRL)  &kp LSHFT  &none    &kp CAPSLOCK  &kp LEFT_ARROW  &kp DOWN       &kp UP_ARROW  &kp RIGHT
-&trans  &none         &none         &none          &none      &none    &kp INSERT    &kp HOME        &kp PAGE_DOWN  &kp PG_UP     &kp END     &none
-                                    &none          &none      &none    &kp ENTER     &kp BACKSPACE   &kp DELETE
+
+ZMK_BASE_LAYER(Nav,
+//              ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
+                 ___           ___           &kp LS(TAB)   ___           ___          ,    &kp PG_UP     NAV_BSPC      NAV_UP        NAV_DEL       ___          ,
+//              ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫
+                 &sk LGUI      &sk LALT      &sk LSHFT     &sk LCTRL     ___          ,    &kp PG_DN     NAV_LEFT      NAV_DOWN      NAV_RIGHT     &kp RET      ,
+//┏━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┓
+   ___           ___           ___           ___           ___           ___          ,    &kp INS       &kp TAB       ___           ___           ___           ___          ,
+//┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
+                                             XXX           ___           ___          ,    ___           CANCEL        ___
+//                                          ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
 )
-ZMK_LAYER(num,
-        &kp LEFT_BRACKET  &kp N7  &kp N8      &kp N9        &kp RIGHT_BRACKET    &none  &none      &none      &none     &none
-        &kp SEMICOLON     &kp N4  &kp N5      &kp NUMBER_6  &kp EQUAL            &none  &kp RSHFT  &kp RCTRL  &kp LALT  &kp LGUI
-&trans  &kp GRAVE         &kp N1  &kp N2      &kp NUMBER_3  &kp BACKSLASH        &none  &none      &none      &none     &none     &none
-                                  &kp PERIOD  &kp N0        &kp MINUS            &none  &none      &none
+
+ZMK_BASE_LAYER(Fn,
+//              ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
+                 &kp F12       &kp F7        &kp F8        &kp F9        ___          ,    ___           &kp C_PREV    &kp C_VOL_UP  &kp C_NEXT    ___          ,
+//              ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫
+                 &hml LGUI F11 &hml LALT F4  &hml LSHFT F5 &hml LCTRL F6 ___          ,    ___           DSK_PREV      VOL_DOWN      DSK_NEXT      ___          ,
+//┏━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┓
+   ___           &kp F10       &kp F1        &kp F2        &kp F3        ___          ,    PIN_APP       PIN_WIN       DSK_MGR       ___           ___           ___          ,
+//┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
+                                             XXX           ___           ___          ,    &kp C_MUTE    &kp C_PP      ___
+//                                          ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
 )
-ZMK_LAYER(sym,
-        &kp LEFT_BRACE  &kp AMPS    &kp ASTRK             &kp LEFT_PARENTHESIS   &kp RIGHT_BRACE    &none  &none      &none      &none          &none
-        &kp COLON       &kp DOLLAR  &kp PERCENT           &kp CARET              &kp PLUS           &none  &kp RSHFT  &kp RCTRL  &kp RIGHT_ALT  &kp RGUI
-&trans  &kp TILDE       &kp EXCL    &kp AT                &kp HASH               &kp PIPE           &none  &none      &none      &none          &none     &trans
+
+ZMK_BASE_LAYER(Num,
+//              ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
+                 ___           &kp N7        &kp N8        &kp N9        ___          ,    ___           ___           ___           ___           ___          ,
+//              ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫
+                 &hml LGUI N0  &hml LALT N4  &hml LSHFT N5 &hml LCTRL N6 ___          ,    ___           ___           ___           ___           ___          ,
+//┏━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┓
+    ___          ___           &kp N1        &kp N2        &kp N3        ___          ,    ___           ___           ___           ___           ___           ___          ,
+//┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
+                                              XXX          ___           ___          ,    ___           ___           ___
+//                                          ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
 )
-ZMK_LAYER(med,
-       &none     &none     &none      &none      &none    &none       &none             &none         &none            &none
-       &kp LGUI  &kp LALT  &kp LCTRL  &kp LSHFT  &none    &none       &kp C_PREV        &kp C_VOL_DN  &kp C_VOLUME_UP  &kp C_NEXT
-&none  &none     &none     &none      &none      &none    &bt BT_CLR  &bt BT_SEL 0      &bt BT_SEL 1  &bt BT_SEL 2     &bt BT_SEL 3  &none
-                           &none      &none      &none    &kp C_STOP  &kp C_PLAY_PAUSE  &kp K_MUTE
+
+
+ZMK_BASE_LAYER(Sys,
+//              ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
+                                             _BT_SEL_KEYS_                            ,    ___           ___           ___           ___           ___          ,
+//              ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫
+                 ___           ___           ___           ___           &bootloader  ,    &bootloader   ___           ___           ___           ___          ,
+//┏━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┓
+   ___           ___           ___           ___           ___           &sys_reset   ,    &sys_reset    ___           ___           ___           ___           ___          ,
+//┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
+                                              XXX          ___           ___          ,    ___           ___           ___
+//                                          ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
 )
-ZMK_LAYER(fun,
-       &kp F12  &kp F7  &kp F8      &kp F9     &kp PRINTSCREEN    &none  &none      &none      &none     &none
-       &kp F11  &kp F4  &kp F5      &kp F6     &kp SCROLLLOCK     &none  &kp RSHFT  &kp RCTRL  &kp RALT  &kp RGUI
-&none  &kp F10  &kp F1  &kp F2      &kp F3     &kp PAUSE_BREAK    &none  &none      &none      &none     &none     &none
-                        &kp K_MENU  &kp SPACE  &kp TAB            &none  &none      &none
-)
-ZMK_LAYER(but,
-        &kp K_UNDO  &kp K_CUT  &kp K_COPY  &kp K_PASTE  &kp K_REDO    &kp K_REDO  &kp K_PASTE  &kp K_COPY  &kp K_CUT  &kp K_UNDO
-        &kp LGUI    &kp LALT   &kp LCTRL   &kp LSHFT    &none         &none       &kp RSHFT    &kp RCTRL   &kp RALT   &kp RGUI
-&trans  &kp K_UNDO  &kp K_CUT  &kp K_COPY  &kp K_PASTE  &kp K_REDO    &kp K_REDO  &kp K_PASTE  &kp K_COPY  &kp K_CUT  &kp K_UNDO  &none
-                               &none       &none        &none         &none       &none        &none
-)
-/ {
-    combos {
-        compatible = "zmk,combos";
 
-        esc_c {
-            bindings = <&kp ESCAPE>;
-            key-positions = <LT3 LT2>;
-        };
-
-        ent_c {
-            bindings = <&kp ENTER>;
-            key-positions = <LT2 LT1>;
-        };
-
-        at_c {
-            bindings = <&kp AT>;
-            key-positions = <LM3 LT3>;
-        };
-
-        hash_c {
-            bindings = <&kp HASH>;
-            key-positions = <LT2 LT2> ;
-        };
-
-        dollar_c {
-            bindings = <&kp DOLLAR>;
-            key-positions = <LT1 LT1>;
-        };
-
-        percent_c {
-            bindings = <&kp PERCENT>;
-            key-positions = <LT0 LT0>;
-        };
-
-        tab_c {
-            bindings = <&kp TAB>;
-            key-positions = <LM3 LM2>;
-        };
-
-        grave_c {
-            bindings = <&kp GRAVE>;
-            key-positions = <LM3 LB3>;
-        };
-
-        bslsh_c {
-            bindings = <&kp BSLH>;
-            key-positions = <LM2 LB2>;
-        };
-
-        eql_c {
-            bindings = <&kp EQUAL>;
-            key-positions = <LM1 LB1>;
-        };
-
-        tild_c {
-            bindings = <&kp TILDE>;
-            key-positions = <LM0 LB0>;
-        };
-
-        copy_c {
-            bindings = <&kp K_COPY>;
-            key-positions = <LB2 LB3>;
-        };
-
-        paste_c {
-            bindings = <&kp K_PASTE>;
-            key-positions = <LB1 LB2>;
-        };
-
-        caret_c {
-            bindings = <&kp CARET>;
-            key-positions = <RT0 RM0>;
-        };
-
-        under_c {
-            bindings = <&kp UNDER>;
-            key-positions = <RM0 RB0>;
-        };
-
-        plus_c {
-            bindings = <&kp PLUS>;
-            key-positions = <RT1 RM1>;
-        };
-
-        minus_c {
-            bindings = <&kp MINUS>;
-            key-positions = <RM1 RB1>;
-        };
-
-        bspc_c {
-            bindings = <&kp BACKSPACE>;
-            key-positions = <RT1 RT2>;
-        };
-
-        del_c {
-            bindings = <&kp DEL>;
-            key-positions = <RT2 RT3>;
-        };
-
-        aster_c {
-            bindings = <&kp ASTERISK>;
-            key-positions = <RT2 RM2>;
-        };
-
-        slash_c {
-            bindings = <&kp SLASH>;
-            key-positions = <RM2 RB2>;
-        };
-
-        amp_c {
-            bindings = <&kp AMPS>;
-            key-positions = <RT3 RM3>;
-        };
-
-        pipe_c {
-            bindings = <&kp PIPE>;
-            key-positions = <RM3 RB3>;
-        };
-
-        lpar_c {
-            bindings = <&left_par>;
-            key-positions = <RM1 RM2>;
-        };
-
-        rpar_c {
-            bindings = <&right_par>;
-            key-positions = <RM2 RM3>;
-        };
-
-        lbr_c {
-            bindings = <&left_br>;
-            key-positions = <RB1 RB2>;
-        };
-
-        rbr_c {
-            bindings = <&right_br>;
-            key-positions = <RB2 RB3>;
-        };
-    };
-
-    macros {
-        rus: rus {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp RG(SPACE) &to 1>;
-            label = "RUS";
-        };
-
-        eng: eng {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LG(SPACE) &to 0>;
-            label = "ENG";
-        };
-    };
-
-    behaviors {
-        hrml: hrml {
-            compatible = "zmk,behavior-hold-tap";
-            label = "HRML";
-            bindings = <&kp>, <&kp>;
-
-            #binding-cells = <2>;
-            tapping-term-ms = <280>;
-            quick-tap-ms = <175>;
-            require-prior-idle-ms = <150>;
-            flavor = "balanced";
-            hold-trigger-on-release;
-            hold-trigger-key-positions = <35 36 37 34 32 33 5 6 7 8 9 15 16 17 18 19 26 27 28 29 31 30>;
-        };
-
-        hrmr: hrmr {
-            compatible = "zmk,behavior-hold-tap";
-            label = "HRMR";
-            bindings = <&kp>, <&kp>;
-
-            #binding-cells = <2>;
-            tapping-term-ms = <280>;
-            quick-tap-ms = <175>;
-            require-prior-idle-ms = <150>;
-            flavor = "balanced";
-            hold-trigger-on-release;
-            hold-trigger-key-positions = <35 36 37 34 32 33 0 1 2 3 4 10 11 12 13 14 20 21 22 23 24 25>;
-        };
-
-        left_par: left_par {
-            compatible = "zmk,behavior-mod-morph";
-            label = "LEFT_PAR";
-            bindings = <&kp LEFT_PARENTHESIS>, <&kp LESS_THAN>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_RSFT|MOD_LSFT)>;
-        };
-
-        right_par: right_par {
-            compatible = "zmk,behavior-mod-morph";
-            label = "RIGHT_PAR";
-            bindings = <&kp RIGHT_PARENTHESIS>, <&kp GT>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_RSFT|MOD_LSFT)>;
-        };
-
-        left_br: left_br {
-            compatible = "zmk,behavior-mod-morph";
-            label = "LEFT_BR";
-            bindings = <&kp LEFT_BRACKET>, <&kp LEFT_BRACE>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_RSFT|MOD_LSFT)>;
-        };
-
-        right_br: right_br {
-            compatible = "zmk,behavior-mod-morph";
-            label = "RIGHT_BR";
-            bindings = <&kp RIGHT_BRACKET>, <&kp RIGHT_BRACE>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_RSFT|MOD_LSFT)>;
-        };
-    };
-};
 /* vim: set ft=c tw=146: */
