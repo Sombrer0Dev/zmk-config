@@ -62,7 +62,7 @@ MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS) // Right-hand HRMs.
   ZMK_COMBO_6(NAME, &hm_combo_##NAME HOLD 0, POS, LAYERS, COMBO_MS, IDLE_MS)
 
 
-/* #include "combos.dtsi" // Must be sourced after HRM-combo hack. */
+#include "combos.dtsi" // Must be sourced after HRM-combo hack.
 
 /* Nav cluster */
 
@@ -222,7 +222,7 @@ ZMK_BASE_LAYER(Num,
 
 ZMK_BASE_LAYER(Sym,
 //              ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
-                 &kp GRAVE     &kp           &kp LT        &kp GT        &kp COLON    ,    &kp SEMI      &kp FSLH      &kp BSLH      &kp           &kp          ,
+                 &none         &none         &kp LT        &kp GT        &none        ,    &none         &kp FSLH      &kp BSLH      &none         &none        ,
 //              ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫
               &hml LGUI DLLR &hml LALT PLUS &hml LCTRL LPAR &hml LSHFT RPAR &kp AT    ,    &kp PIPE  &hmr RSHFT LBKT &hmr RCTRL RBKT &hmr RALT EQUAL &hmr RGUI STAR,
 //┏━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┓
