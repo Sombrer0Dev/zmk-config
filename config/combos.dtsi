@@ -8,8 +8,8 @@
             ╰─────────────╯ ╰─────────────╯
 */
 
-#define COMBO_TERM_FAST 18
-#define COMBO_TERM_SLOW 30
+#define COMBO_TERM_FAST 20
+#define COMBO_TERM_SLOW 60
 
 #define COMBO_IDLE_FAST 150
 #define COMBO_IDLE_SLOW 50
@@ -39,6 +39,7 @@ ZMK_COMBO(lbkt,  &kp LBKT,     RB1 RB2,     DEF RUS     NUM, COMBO_TERM_FAST, CO
 ZMK_COMBO(rbkt,  &kp RBKT,     RB2 RB3,     DEF RUS     NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST)
 ZMK_COMBO(lbrc,  &kp LBRC,     RB1 RB2,         NAV        , COMBO_TERM_FAST, COMBO_IDLE_FAST)
 ZMK_COMBO(rbrc,  &kp RBRC,     RB2 RB3,         NAV        , COMBO_TERM_FAST, COMBO_IDLE_FAST)
+
 
 /* Vertical combos - left hand */
 ZMK_COMBO(at,    &kp AT,       LT3 LM3,     DEF RUS NAV NUM, COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
