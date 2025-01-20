@@ -142,8 +142,7 @@ ZMK_TAP_DANCE(copy_cut, bindings = <&kp LC(INS)>, <&kp LC(X)>;
 #define VOL_DOWN  &hmr RSHFT C_VOL_DN
 
 /* Russian language*/
-ZMK_MACRO(rus, bindings = <&kp LG(SPACE) &to 0>;)
-ZMK_MACRO(eng, bindings = <&kp LG(SPACE) &to 1>;)
+ZMK_MACRO(rus, bindings = <&kp LG(SPACE) &tog 1>;)
 
 /* Keymap */
 
@@ -174,7 +173,7 @@ ZMK_BASE_LAYER(Rus,
 //┏━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┓
    &kp ESC       &kp Z         &kp X         &kp C         &kp V         &kp B        ,    &kp N         &kp M         &kp COMMA     &kp DOT       &qexcl        &kp SQT      ,
 //┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
-                                             &eng          &lt_spc NAV 1 &lt FN TAB   ,    &bs_del       &kp RET       SMART_NUM_R
+                                             &rus          &lt_spc NAV 1 &lt FN TAB   ,    &bs_del       &kp RET       SMART_NUM_R
 //                                          ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
 )
 
