@@ -62,7 +62,7 @@ MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS) // Right-hand HRMs.
   ZMK_COMBO_6(NAME, &hm_combo_##NAME HOLD 0, POS, LAYERS, COMBO_MS, IDLE_MS)
 
 
-#include "combos.dtsi" // Must be sourced after HRM-combo hack.
+/* #include "combos.dtsi" // Must be sourced after HRM-combo hack. */
 
 /* Nav cluster */
 
