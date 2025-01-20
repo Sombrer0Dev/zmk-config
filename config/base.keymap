@@ -99,7 +99,7 @@ ZMK_MOD_MORPH(smart_shft,
   mods = <(MOD_LSFT)>;
 )
 &caps_word { // Mods deactivate caps-word, requires PR #1451. [TODO: rebase]
-  /delete-property/ ignore-modifiers;
+  ignore-modifiers;
 };
 
 // Tap: num-word | double-tap: sticky num-layer | Hold: num-layer.
