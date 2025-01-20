@@ -110,6 +110,9 @@ ZMK_TAP_DANCE(num_dance, bindings = <&num_word NUM>, <&sl NUM>;
 // Tap: qmark | Shift + tap: excl.
 SIMPLE_MORPH(qexcl, SFT, &kp QMARK, &kp EXCL)
 
+// Tap: qmark | Shift + tap: excl.
+SIMPLE_MORPH(colon, SFT, &kp COLON, &kp SEMI)
+
 // Tap: left/right parenthesis | Shft + tap: less-than/greater-than.
 SIMPLE_MORPH(lpar_lt, SFT, &kp LPAR, &kp LT)
 SIMPLE_MORPH(rpar_gt, SFT, &kp RPAR, &kp GT)
@@ -153,7 +156,7 @@ ZMK_CONDITIONAL_LAYER(sys, FN NUM, SYS) // FN + NUM --> SYS.
 
 ZMK_BASE_LAYER(Base,
 //              ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
-                 &kp Q         &kp W         &kp F         &kp P         &kp B        ,    &kp J         &kp L         &kp U         &kp Y         &kp SEMI     ,
+                 &kp Q         &kp W         &kp F         &kp P         &kp B        ,    &kp J         &kp L         &kp U         &kp Y         &colon       ,
 //              ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫
                  &hml LGUI A   &hml LALT R   &hml LCTRL S  &hml LSHFT T  &kp G        ,    &kp M         &hmr RSHFT N  &hmr RCTRL E  &hmr RALT I   &hmr RGUI O  ,
 //┏━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┓
