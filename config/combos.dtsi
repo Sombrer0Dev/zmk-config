@@ -16,7 +16,7 @@
 
 ZMK_COMBO(minus,        &bs_del,      RT1 RT2,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 ZMK_COMBO(equal,        &kp EQUAL,    RT2 RT3,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
-ZMK_COMBO(star,         &kp STAR,     RT0 RT1,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
+ZMK_COMBO(star_cent,    &starcent,    RT0 RT1,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 
 ZMK_COMBO(bspc,         &min,         RM1 RM2,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE, RS(RCTRL), KEYS_L)
 ZMK_COMBO(double_slash, &dslh,        RM2 RM3,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE, RS(RALT),  KEYS_L)
@@ -29,8 +29,8 @@ ZMK_COMBO(pipe_sand,    &pipesand,    RB1 RB0,  BASE NAV NUM,   COMBO_TAP_TERM, 
 
 
 ZMK_COMBO(grave,        &kp GRAVE,    LT3 LT2,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
-ZMK_COMBO(hash_at,      &hashat,      LT2 LT1,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
-ZMK_COMBO(percent,      &kp PRCNT,    LT0 LT1,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
+ZMK_COMBO(enter,        &kp RET,      LT2 LT1,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
+ZMK_COMBO(hash_at,      &hashat,      LT1 LT0,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 
 ZMK_COMBO(lpar,         &lpar_lt,     LM2 LM3,  BASE     NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE, RS(LCTRL), KEYS_R)
 ZMK_COMBO(rpar,         &rpar_gt,     LM1 LM2,  BASE     NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE, RS(LALT),  KEYS_R)
@@ -43,8 +43,8 @@ ZMK_COMBO(paste,        &kp LS(INS),  LB2 LB1,  BASE NAV NUM,   COMBO_TAP_TERM, 
 ZMK_COMBO(dllr_car,     &dllrcar,     LB0 LB1,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 
 /*                       COMBOS
-    ╭────────~───@────────╮  ╭────────D───+────────╮
-    │ ... ...`...#...%... │  │ ...*...B...=... ... │
+    ╭────────~───────@────╮  ╭────%───D───+────────╮
+    │ ... ...`...E...#... │  │ ...*...B...=... ... │
     │        <   >        │  │        _   \        │
 ╭───╯ ... ...(...)... ... │  │ ... ...-.../... ... ╰───╮
 │                    &    │  │    ^   {   }            │
