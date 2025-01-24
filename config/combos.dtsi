@@ -21,10 +21,10 @@ ZMK_COMBO(star_cent,    &starcent,    RT0 RT1,  BASE NAV NUM,   COMBO_TAP_TERM, 
 ZMK_COMBO(min_c,        &min,         RM1 RM2,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE, RS(RCTRL), KEYS_L)
 ZMK_COMBO(double_slash, &dslh,        RM2 RM3,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE, RS(RALT),  KEYS_L)
 
-ZMK_COMBO(rbkt,         &kp RBKT,     RB1 RB2,  BASE     NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
-ZMK_COMBO(lbkt,         &kp LBKT,     RB2 RB3,  BASE     NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
-ZMK_COMBO(rbrc,         &kp RBRC,     RB1 RB2,       NAV    ,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
-ZMK_COMBO(lbrc,         &kp LBRC,     RB2 RB3,       NAV    ,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
+ZMK_COMBO(rbkt,         &kp RBKT,     RB2 RB3,  BASE     NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
+ZMK_COMBO(lbkt,         &kp LBKT,     RB1 RB2,  BASE     NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
+ZMK_COMBO(rbrc,         &kp RBRC,     RB2 RB3,       NAV    ,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
+ZMK_COMBO(lbrc,         &kp LBRC,     RB1 RB2,       NAV    ,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 ZMK_COMBO(pipe_sand,    &pipesand,    RB1 RB0,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 
 
