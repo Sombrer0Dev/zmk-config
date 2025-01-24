@@ -29,7 +29,7 @@ ZMK_COMBO(pipe_sand,    &pipesand,    RB1 RB0,  BASE NAV NUM,   COMBO_TAP_TERM, 
 
 
 ZMK_COMBO(grave,        &kp GRAVE,    LT3 LT2,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
-ZMK_COMBO(enter,        &kp RET,      LT2 LT1,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
+ZMK_COMBO(tab,          &kp TAB,      LT2 LT1,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 ZMK_COMBO(hash_at,      &hashat,      LT1 LT0,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 
 ZMK_COMBO(lpar,         &lpar_lt,     LM2 LM3,  BASE     NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE, RS(LCTRL), KEYS_R)
