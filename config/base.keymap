@@ -95,8 +95,8 @@ MASK_MODS(masked_end,  (MOD_LCTL), &kp END)
 /* Auto-layers */
 // Tap: sticky-shift | Shift + tap/ double-tap: caps-word | Hold: shift.
 ZMK_MOD_MORPH(smart_shft,
-  bindings = <&sk LSHFT>, <&caps_word>;
-  mods = <(MOD_LSFT)>;
+  bindings = <&sk RSHFT>, <&caps_word>;
+  mods = <(MOD_RSFT)>;
 )
 
 // Tap: num-word | double-tap: sticky num-layer | Hold: num-layer.
