@@ -122,6 +122,9 @@ SIMPLE_MORPH(hashat, SFT, &kp HASH, &kp AT)
 // Tap: star | Shift + tap: percent.
 SIMPLE_MORPH(starcent, SFT, &kp STAR, &kp PRCT)
 
+// Tap: star | Shift + tap: percent.
+SIMPLE_MORPH(min, SFT, &kp MINUS, &kp UNDER)
+
 // Tap: pipe | Shift + tap: ampersand.
 SIMPLE_MORPH(pipesand, SFT, &kp STAR, &kp PRCT)
 
