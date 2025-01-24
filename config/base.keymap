@@ -126,7 +126,7 @@ SIMPLE_MORPH(starcent, SFT, &kp STAR, &kp PRCT)
 SIMPLE_MORPH(min, SFT, &kp MINUS, &kp UNDER)
 
 // Tap: pipe | Shift + tap: ampersand.
-SIMPLE_MORPH(pipesand, SFT, &kp STAR, &kp PRCT)
+SIMPLE_MORPH(pipesand, SFT, &kp PIPE, &kp AMPS)
 
 // Tap: qmark | Shift + tap: excl.
 SIMPLE_MORPH(qexcl, SFT, &kp QMARK, &kp EXCL)
