@@ -16,7 +16,7 @@
 
 ZMK_COMBO(minus,        &kp MINUS,    RT1 RT2,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 ZMK_COMBO(equal,        &kp EQUAL,    RT2 RT3,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
-ZMK_COMBO(dllr_car,     &dllrcar,     RT0 RT1,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
+ZMK_COMBO(star,         &kp STAR,    RT2 RT3,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 
 ZMK_COMBO(bspc,         &bs_del,      RM1 RM2,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE, RS(RCTRL), KEYS_L)
 ZMK_COMBO(double_slash, &dslh,        RM2 RM3,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE, RS(RALT),  KEYS_L)
@@ -25,12 +25,12 @@ ZMK_COMBO(rbkt,         &kp RBKT,     RB1 RB2,  BASE     NUM,   COMBO_TAP_TERM, 
 ZMK_COMBO(lbkt,         &kp LBKT,     RB2 RB3,  BASE     NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 ZMK_COMBO(rbrc,         &kp RBRC,     RB1 RB2,       NAV    ,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 ZMK_COMBO(lbrc,         &kp LBRC,     RB2 RB3,       NAV    ,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
-ZMK_COMBO(star_cent,    &starcent,    RB0 RB1,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
+ZMK_COMBO(pipe_sand,    &pipesand,    RB1 RB0,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 
 
 ZMK_COMBO(grave,        &kp GRAVE,    LT3 LT2,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 ZMK_COMBO(hash_at,      &hashat,      LT2 LT1,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
-ZMK_COMBO(amps_car,     &ampscar,     LT0 LT1,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
+ZMK_COMBO(percent,      &kp PRCNT,    LT0 LT1,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 
 ZMK_COMBO(lpar,         &lpar_lt,     LM1 LM2,  BASE     NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE, RS(LCTRL), KEYS_R)
 ZMK_COMBO(rpar,         &rpar_gt,     LM2 LM3,  BASE     NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE, RS(LALT),  KEYS_R)
@@ -40,15 +40,15 @@ ZMK_COMBO(gt,           &kp GT,       LM2 LM3,       NAV    ,   COMBO_TAP_TERM, 
 ZMK_COMBO(cut,          &kp LC(X),    LB3 LB1,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 ZMK_COMBO(copy,         &kp LC(INS),  LB3 LB2,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 ZMK_COMBO(paste,        &kp LS(INS),  LB2 LB1,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
-ZMK_COMBO(pipe_sand,    &pipesand,    LB1 LB0,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
+ZMK_COMBO(dllr_car,     &dllrcar,     LT0 LT1,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 
 /*                       COMBOS
-    ╭────────~───@───^────╮  ╭────*───_───+────────╮
-    │ ... ...`...#...$... │  │ ...%...-...=... ... │
+    ╭────────~───@────────╮  ╭────────_───+────────╮
+    │ ... ...`...#...%... │  │ ...*...-...=... ... │
     │        <   >        │  │        D   \        │
 ╭───╯ ... ...(...)... ... │  │ ... ...B.../... ... ╰───╮
-│                    &    │  │    %   {   }            │
-│ ... ... ...C.X.P...|... │  │ ...*...[...]... ... ... │
+│                    &    │  │    ^   {   }            │
+│ ... ... ...C.X.P...|... │  │ ...$...[...]... ... ... │
 │                         │  │                         │
 ╰───────────╮ ... ... ... │  │ ... ... ... ╭───────────╯
             ╰─────────────╯  ╰─────────────╯
