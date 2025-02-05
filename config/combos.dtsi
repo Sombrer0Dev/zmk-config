@@ -19,8 +19,8 @@ ZMK_COMBO(equal,        &kp EQUAL,    RT2 RT3,  BASE NAV NUM,   COMBO_TAP_TERM, 
 ZMK_COMBO(star_cent,    &starcent,    RT0 RT1,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 
 
-ZMK_COMBO(lbkt,         &kp LBKT,     RM1 RM2,  BASE     NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE, RS(RCTRL), KEYS_L)
-ZMK_COMBO(rbkt,         &kp RBKT,     RM2 RM3,  BASE     NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE, RS(RALT),  KEYS_L)
+ZMK_COMBO(lbkt,         &left_brc,    RM1 RM2,  BASE     NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE, RS(RCTRL), KEYS_L)
+ZMK_COMBO(rbkt,         &right_brc,   RM2 RM3,  BASE     NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE, RS(RALT),  KEYS_L)
 ZMK_COMBO(rbrc,         &kp RBRC,     RM2 RM3,       NAV    ,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 ZMK_COMBO(lbrc,         &kp LBRC,     RM1 RM2,       NAV    ,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 

@@ -148,8 +148,6 @@ SIMPLE_MORPH(hashat, SFT, &kp HASH, &kp AT)
 // Tap: star | Shift + tap: percent.
 SIMPLE_MORPH(starcent, SFT, &kp STAR, &kp PRCT)
 
-// Tap: star | Shift + tap: percent.
-SIMPLE_MORPH(min, SFT, &kp MINUS, &kp UNDER)
 
 // Tap: pipe | Shift + tap: ampersand.
 SIMPLE_MORPH(pipesand, SFT, &kp PIPE, &kp AMPS)
@@ -166,6 +164,11 @@ SIMPLE_MORPH(colon, SFT, &kp COLON, &kp SEMI)
 
 // Tap: slash | Shift + tap: back slash.
 SIMPLE_MORPH(dslh, SFT, &kp FSLH, &kp BSLH)
+
+/* morphs for combos */
+SIMPLE_MORPH(min, SFT, &kp MINUS, &kp UNDER)
+SIMPLE_MORPH(left_brc, SFT, &kp LBKT, &kp LBRC)
+SIMPLE_MORPH(right_brc, SFT, &kp RBKT, &kp RBRC)
 
 // Tap: space | Shift + tap: dot -> space -> sticky shift | Hold: layer.
 ZMK_HOLD_TAP(lt_spc, bindings = <&mo>, <&spc_morph>; flavor = "balanced";
