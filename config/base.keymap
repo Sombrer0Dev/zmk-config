@@ -95,21 +95,44 @@ ZMK_HOLD_TAP(mt_end, bindings = <&masked_end>, <&kp>; MT_CORE)
 MASK_MODS(masked_home, (MOD_LCTL), &kp HOME)
 MASK_MODS(masked_end,  (MOD_LCTL), &kp END)
 
-/* Auto-layers */
-// Tap: sticky-shift | Shift + tap/ double-tap: caps-word | Hold: shift.
-ZMK_MOD_MORPH(smart_shft,
-  bindings = <&sk RSHFT>, <&caps_word>;
-  mods = <(MOD_RSFT)>;
-)
+
+/* Magic-shift & auto-layers */
+
+// Tap: repeat after alpha, else sticky-shift |
+// Shift + tap/ double-tap: caps-word | Hold: shift.
+#define MAGIC_SHIFT &magic_shift LSHFT 0
+ZMK_HOLD_TAP(magic_shift, bindings = <&kp>, <&magic_shift_tap>;
+             flavor = "balanced"; tapping-term-ms = <200>;
+             quick-tap-ms = <QUICK_TAP_MS>;)
+ZMK_MOD_MORPH(magic_shift_tap, bindings = <&shift_repeat>, <&caps_word>;
+              mods = <(MOD_LSFT)>;)
+ZMK_ADAPTIVE_KEY(
+    shift_repeat, bindings = <&sk LSHFT>;
+    repeat {
+      trigger-keys = <A B C D E F G H I J K L M N O P Q R S T U V W X Y Z>;
+      bindings = <&key_repeat>;
+      max-prior-idle-ms = <1200>;
+      strict-modifiers;
+    };)
+
+&caps_word { // Mods deactivate caps-word, requires PR #1451. [TODO: rebase]
+  /delete-property/ ignore-modifiers;
+};
 
 // Tap: num-word | double-tap: sticky num-layer | Hold: num-layer.
 #define SMART_NUM &smart_num NUM 0
-#define SMART_NUM_R &smart_num NUM 1
 ZMK_HOLD_TAP(smart_num, bindings = <&mo>, <&num_dance>; flavor = "balanced";
              tapping-term-ms = <200>; quick-tap-ms = <QUICK_TAP_MS>;)
 ZMK_TAP_DANCE(num_dance, bindings = <&num_word NUM>, <&sl NUM>;
               tapping-term-ms = <200>;)
 
+
+
+/* Custom behaviors */
+
+// Alt+Tab swapper, requires tri-state module.
+ZMK_TRI_STATE(swapper, bindings = <&kt LALT>, <&kp TAB>, <&kt LALT>;
+              ignored-key-positions = <LT2>;)
 
 // Define mod-morph with a *single* mod trigger for less repetition.
 #define SIMPLE_MORPH(NAME, MOD, BINDING1, BINDING2)                            \
@@ -180,11 +203,11 @@ ZMK_BASE_LAYER(Base,
 //              ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
                  &kp Q         &kp W         &kp F         &kp P         &kp B        ,    &kp J         &kp L         &kp U         &kp Y         &colon       ,
 //              ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫
-                 &hml LGUI A   &hml LALT R   &hml LCTRL S  &hml LSHFT T  &kp G        ,    &kp M         &hmr RSHFT N  &hmr RCTRL E  &hmr RALT I   &hmr RGUI O  ,
+                 &hml LGUI A   &hml LALT R   &hml LCTRL S  &kp T         &kp G        ,    &kp M         &kp N         &hmr RCTRL E  &hmr RALT I   &hmr RGUI O  ,
 //┏━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┓
    &kp ESC       &kp Z         &kp X         &kp C         &kp D         &kp V        ,    &kp K         &kp H         &kp COMMA     &kp DOT       &qexcl        &kp SQT      ,
 //┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
-                                             &rus          &lt_spc NAV 0 &lt FN RET   ,    SMART_NUM     &smart_shft   &key_repeat
+                                             &rus          &lt_spc NAV 0 &lt FN RET   ,    SMART_NUM     MAGIC_SHIFT   CANCEL
 //                                          ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
 )
 
@@ -196,7 +219,7 @@ ZMK_BASE_LAYER(Rus,
 //┏━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┓
    &kp ESC       &kp Z         &kp X         &kp C         &kp V         &kp B        ,    &kp N         &kp M         &kp COMMA     &kp DOT       &kp SLASH     &kp SQT      ,
 //┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
-                                             &rus          &lt_spc NAV 0 &lt FN RET   ,    SMART_NUM     &smart_shft   &key_repeat
+                                             &rus          &lt_spc NAV 0 &lt FN RET   ,    SMART_NUM     MAGIC_SHIFT   CANCEL
 //                                          ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
 )
 
@@ -236,21 +259,6 @@ ZMK_BASE_LAYER(Num,
                                               XXX          ___           ___          ,    ___           ___           ___
 //                                          ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
 )
-
-/*
-ZMK_BASE_LAYER(Sym,
-//              ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
-                 &none         &none         &kp LT        &kp GT        &none        ,    &none         &kp FSLH      &kp BSLH      &none         &none        ,
-//              ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫
-              &hml LGUI DLLR &hml LALT PLUS &hml LCTRL LPAR &hml LSHFT RPAR &kp AT    ,    &kp PIPE  &hmr RSHFT LBKT &hmr RCTRL RBKT &hmr RALT EQUAL &hmr RGUI STAR,
-//┏━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┓
-    ___          &kp EXCL      &kp HASH      &kp LBRC      &kp RBRC      &kp TILDE    ,    &kp AMPS      &kp MINUS     &kp UNDER     &kp PRCNT     &kp CARET     ___          ,
-//┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
-                                              XXX          ___           ___          ,    ___           ___           ___
-//                                          ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
-)
-*/
-
 
 ZMK_BASE_LAYER(Sys,
 //              ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓

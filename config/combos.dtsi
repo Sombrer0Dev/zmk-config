@@ -18,13 +18,14 @@ ZMK_COMBO(bspc,         &bs_del,      RT1 RT2,  BASE NAV NUM,   COMBO_TAP_TERM, 
 ZMK_COMBO(equal,        &kp EQUAL,    RT2 RT3,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 ZMK_COMBO(star_cent,    &starcent,    RT0 RT1,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 
-ZMK_COMBO(min_c,        &min,         RM1 RM2,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE, RS(RCTRL), KEYS_L)
-ZMK_COMBO(double_slash, &dslh,        RM2 RM3,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE, RS(RALT),  KEYS_L)
 
-ZMK_COMBO(rbkt,         &kp RBKT,     RB2 RB3,  BASE     NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
-ZMK_COMBO(lbkt,         &kp LBKT,     RB1 RB2,  BASE     NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
-ZMK_COMBO(rbrc,         &kp RBRC,     RB2 RB3,       NAV    ,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
-ZMK_COMBO(lbrc,         &kp LBRC,     RB1 RB2,       NAV    ,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
+ZMK_COMBO(lbkt,         &kp LBKT,     RM1 RM2,  BASE     NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE, RS(RCTRL), KEYS_L)
+ZMK_COMBO(rbkt,         &kp RBKT,     RM2 RM3,  BASE     NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE, RS(RALT),  KEYS_L)
+ZMK_COMBO(rbrc,         &kp RBRC,     RM2 RM3,       NAV    ,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
+ZMK_COMBO(lbrc,         &kp LBRC,     RM1 RM2,       NAV    ,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
+
+ZMK_COMBO(min_c,        &min,         RB1 RB2,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
+ZMK_COMBO(double_slash, &dslh,        RB2 RB3,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 ZMK_COMBO(pipe_sand,    &pipesand,    RB1 RB0,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 
 
@@ -41,15 +42,15 @@ ZMK_COMBO(cut,          &kp LC(X),    LB3 LB1,  BASE NAV NUM,   COMBO_TAP_TERM, 
 ZMK_COMBO(copy,         &kp LC(INS),  LB3 LB2,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 ZMK_COMBO(paste,        &kp LS(INS),  LB2 LB1,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 ZMK_COMBO(dllr_car,     &dllrcar,     LB0 LB1,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
-ZMK_COMBO(bspc_mouse,         &bs_del,      LB4 LB3,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
+ZMK_COMBO(bspc_mouse,   &bs_del,      LB4 LB3,  BASE NAV NUM,   COMBO_TAP_TERM, COMBO_TAP_IDLE)
 
 /*                       COMBOS
     ╭────────~───────@────╮  ╭────%───D───+────────╮
     │ ... ...`...E...#... │  │ ...*...B...=... ... │
-    │        <   >        │  │        _   \        │
-╭───╯ ... ...(...)... ... │  │ ... ...-.../... ... ╰───╮
-│        D           &    │  │    ^   {   }            │
-│ ... ...B...C.X.P...|... │  │ ...$...[...]... ... ... │
+    │        <   >        │  │        {   }        │
+╭───╯ ... ...(...)... ... │  │ ... ...[...]... ... ╰───╮
+│        D           &    │  │    ^   -   \            │
+│ ... ...B...C.X.P...|... │  │ ...$..._.../... ... ... │
 │                         │  │                         │
 ╰───────────╮ ... ... ... │  │ ... ... ... ╭───────────╯
             ╰─────────────╯  ╰─────────────╯

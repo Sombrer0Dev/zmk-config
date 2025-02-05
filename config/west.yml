@@ -6,11 +6,15 @@ manifest:
       url-base: https://github.com/caksoylar
     - name: urob
       url-base: https://github.com/urob
+    - name: dhruvinsh
+      url-base: https://github.com/dhruvinsh
+
   projects:
     - name: zmk
-      remote: zmkfirmware
+      remote: urob
       revision: main
       import: app/west.yml
+
     - name: zmk-rgbled-widget
       remote: caksoylar
       revision: main
@@ -19,6 +23,12 @@ manifest:
       revision: main
     - name: zmk-auto-layer
       remote: urob
-      revision: main # set to same version as zmk
+      revision: main
+    - name: zmk-tri-state
+      remote: dhruvinsh
+      revision: main
+    - name: zmk-adaptive-key
+      remote: urob
+
   self:
     path: config
