@@ -111,7 +111,7 @@ ZMK_ADAPTIVE_KEY(
     repeat {
       trigger-keys = <A B C D E F G H I J K L M N O P Q R S T U V W X Y Z>;
       bindings = <&key_repeat>;
-      max-prior-idle-ms = <1200>;
+      max-prior-idle-ms = <300>;
       strict-modifiers;
     };)
 
