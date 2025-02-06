@@ -139,34 +139,34 @@ ZMK_TRI_STATE(swapper, bindings = <&kt LALT>, <&kp TAB>, <&kt LALT>;
   ZMK_MOD_MORPH(NAME, mods = <(MOD_L##MOD | MOD_R##MOD)>;                      \
                 bindings = <BINDING1>, <BINDING2>;)
 
-// Tap: dollar | Shift + tap: caret.
-SIMPLE_MORPH(dllrcar, SFT, &kp DLLR, &kp CARET)
-
-// Tap: hash | Shift + tap: at.
-SIMPLE_MORPH(hashat, SFT, &kp HASH, &kp AT)
-
-// Tap: star | Shift + tap: percent.
-SIMPLE_MORPH(starcent, SFT, &kp STAR, &kp PRCT)
-
-
-// Tap: pipe | Shift + tap: ampersand.
-SIMPLE_MORPH(pipesand, SFT, &kp PIPE, &kp AMPS)
-
-// Tap: qmark | Shift + tap: excl.
-SIMPLE_MORPH(qexcl, SFT, &kp QMARK, &kp EXCL)
+/* // Tap: dollar | Shift + tap: caret. */
+/* SIMPLE_MORPH(dllrcar, SFT, &kp DLLR, &kp CARET) */
+/**/
+/* // Tap: hash | Shift + tap: at. */
+/* SIMPLE_MORPH(hashat, SFT, &kp HASH, &kp AT) */
+/**/
+/* // Tap: star | Shift + tap: percent. */
+/* SIMPLE_MORPH(starcent, SFT, &kp STAR, &kp PRCT) */
+/**/
+/**/
+/* // Tap: pipe | Shift + tap: ampersand. */
+/* SIMPLE_MORPH(pipesand, SFT, &kp PIPE, &kp AMPS) */
+/**/
+/* // Tap: qmark | Shift + tap: excl. */
+/* SIMPLE_MORPH(qexcl, SFT, &kp QMARK, &kp EXCL) */
 
 // Tap: left/right parenthesis | Shft + tap: less-than/greater-than.
 SIMPLE_MORPH(lpar_lt, SFT, &kp LPAR, &kp LT)
 SIMPLE_MORPH(rpar_gt, SFT, &kp RPAR, &kp GT)
 
-// Tap: colon | Shift + tap: semi.
-SIMPLE_MORPH(colon, SFT, &kp COLON, &kp SEMI)
-
-// Tap: slash | Shift + tap: back slash.
-SIMPLE_MORPH(dslh, SFT, &kp FSLH, &kp BSLH)
-
-/* morphs for combos */
-SIMPLE_MORPH(min, SFT, &kp MINUS, &kp UNDER)
+/* // Tap: colon | Shift + tap: semi. */
+/* SIMPLE_MORPH(colon, SFT, &kp COLON, &kp SEMI) */
+/**/
+/* // Tap: slash | Shift + tap: back slash. */
+/* SIMPLE_MORPH(dslh, SFT, &kp FSLH, &kp BSLH) */
+/**/
+/* /* morphs for combos */ */
+/* SIMPLE_MORPH(min, SFT, &kp MINUS, &kp UNDER) */
 SIMPLE_MORPH(left_brc, SFT, &kp LBKT, &kp LBRC)
 SIMPLE_MORPH(right_brc, SFT, &kp RBKT, &kp RBRC)
 
