@@ -21,11 +21,9 @@
 ZMK_COMBO(bspc,        &bs_del,      RT1 RT2,  BASE NAV NUM,   COMBO_TERM_FAST, COMBO_IDLE_FAST)
 ZMK_COMBO(equal,       &kp EQUAL,    RT2 RT3,  BASE NAV NUM,   COMBO_TERM_FAST, COMBO_IDLE_FAST)
 ZMK_COMBO(star,        &kp STAR,     RT0 RT1,  BASE NAV NUM,   COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(plus,        &kp PLUS,     RT1 RT3,  BASE NAV NUM,   COMBO_TERM_FAST, COMBO_IDLE_FAST)
 
-ZMK_COMBO(plus,        &kp PLUS,     RT1 RM1,  BASE NAV NUM,   COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
 ZMK_COMBO(fslh,        &kp FSLH,     RT2 RM2,  BASE NAV NUM,   COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
-ZMK_COMBO(prcnt_v,     &kp PRCNT,    RT3 RM3,  BASE NAV NUM,   COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
-
 
 ZMK_COMBO(lbkt,        &left_brc,    RM1 RM2,  BASE     NUM,   COMBO_TERM_FAST, COMBO_IDLE_FAST, RS(RCTRL), KEYS_L)
 ZMK_COMBO(rbkt,        &right_brc,   RM2 RM3,  BASE     NUM,   COMBO_TERM_FAST, COMBO_IDLE_FAST, RS(RALT),  KEYS_L)
@@ -33,32 +31,26 @@ ZMK_COMBO(rbrc,        &kp RBRC,     RM2 RM3,       NAV    ,   COMBO_TERM_FAST, 
 ZMK_COMBO(lbrc,        &kp LBRC,     RM1 RM2,       NAV    ,   COMBO_TERM_FAST, COMBO_IDLE_FAST)
 
 
-ZMK_COMBO(pipe,        &kp PIPE,     RB0 RB1,  BASE NAV NUM,   COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(pipe,        &pipeamps,    RB0 RB1,  BASE NAV NUM,   COMBO_TERM_FAST, COMBO_IDLE_FAST)
 ZMK_COMBO(minus,       &kp MINUS,    RB1 RB2,  BASE NAV NUM,   COMBO_TERM_FAST, COMBO_IDLE_FAST)
 ZMK_COMBO(dllr,        &kp DLLR,     RB2 RB3,  BASE NAV NUM,   COMBO_TERM_FAST, COMBO_IDLE_FAST)
-
-
-ZMK_COMBO(at_m,        &kp AT,       LT0 RT0,  BASE NAV NUM,   COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
-ZMK_COMBO(prcnt_m,     &kp PRCNT,    LM0 RM0,  BASE NAV NUM,   COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
 
 
 ZMK_COMBO(grave,       &kp GRAVE,    LT3 LT2,  BASE NAV NUM,   COMBO_TERM_FAST, COMBO_IDLE_FAST)
 ZMK_COMBO(ret,         &kp RET,      LT2 LT1,  BASE NAV NUM,   COMBO_TERM_FAST, COMBO_IDLE_FAST)
 ZMK_COMBO(hash,        &kp HASH,     LT1 LT0,  BASE NAV NUM,   COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(tilde,       &kp TILDE,    LT1 LT3,  BASE NAV NUM,   COMBO_TERM_FAST, COMBO_IDLE_FAST)
 
 ZMK_COMBO(bslh,        &kp BSLH,     LT2 LM2,  BASE NAV NUM,   COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
-ZMK_COMBO(tilde,       &kp TILDE,    LT1 LM1,  BASE NAV NUM,   COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
-ZMK_COMBO(at_v,        &kp AT,       LT3 LM3,  BASE NAV NUM,   COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
 
 ZMK_COMBO(lpar,        &lpar_lt,     LM2 LM3,  BASE     NUM,   COMBO_TERM_FAST, COMBO_IDLE_FAST, RS(LCTRL), KEYS_R)
 ZMK_COMBO(rpar,        &rpar_gt,     LM1 LM2,  BASE     NUM,   COMBO_TERM_FAST, COMBO_IDLE_FAST, RS(LALT),  KEYS_R)
 ZMK_COMBO(lt,          &kp LT,       LM2 LM3,       NAV    ,   COMBO_TERM_FAST, COMBO_IDLE_FAST)
 ZMK_COMBO(gt,          &kp GT,       LM1 LM2,       NAV    ,   COMBO_TERM_FAST, COMBO_IDLE_FAST)
 
-
-ZMK_COMBO(amp,         &kp AMPS,     LB0 LB1,  BASE NAV NUM,   COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(percat,      &prcntat,     LB0 LB1,  BASE NAV NUM,   COMBO_TERM_FAST, COMBO_IDLE_FAST)
 ZMK_COMBO(under,       &kp UNDER,    LB1 LB2,  BASE NAV NUM,   COMBO_TERM_FAST, COMBO_IDLE_FAST)
-ZMK_COMBO(caret,        &kp CARET,    LB2 LB3,  BASE NAV NUM,   COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(caret,       &kp CARET,    LB2 LB3,  BASE NAV NUM,   COMBO_TERM_FAST, COMBO_IDLE_FAST)
 
 
 ZMK_COMBO(paste_mouse, &kp LS(INS),  LT4 LT3,  BASE NAV NUM,   COMBO_TERM_FAST, COMBO_IDLE_FAST)
@@ -67,12 +59,12 @@ ZMK_COMBO(bspc_mouse,  &bs_del,      LB4 LB3,  BASE NAV NUM,   COMBO_TERM_FAST, 
 
 
 /*                       COMBOS
-    ╭─────────────────────╮  ╭────────D────────────╮
-    │ ...P...`...E...#.@. │  │ .@.*...B...=... ... │
-    │      @ < \ > ~      │  │      + { / } %      │
-╭───╯ ...C...(...)... .%. │  │ .%. ...[...]... ... ╰───╮
-│        D                │  │                         │
-│ ... ...B...^..._...&... │  │ ...|...-...$... ... ... │
+    ╭──────────~──────────╮  ╭──────────+──────────╮
+    │ ...P...`...E...#... │  │ ...*...B...=... ... │
+    │        < \ >        │  │        { / }        │
+╭───╯ ...C...(...)... ... │  │ ... ...[...]... ... ╰───╮
+│        D           @    │  │    &                    │
+│ ... ...B...^..._...%... │  │ ...|...-...$... ... ... │
 │                         │  │                         │
 ╰───────────╮ ... ... ... │  │ ... ... ... ╭───────────╯
             ╰─────────────╯  ╰─────────────╯

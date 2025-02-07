@@ -142,6 +142,12 @@ ZMK_TRI_STATE(swapper, bindings = <&kt LALT>, <&kp TAB>, <&kt LALT>;
 // Tap: qmark | Shift + tap: excl.
 SIMPLE_MORPH(qexcl, SFT, &kp QMARK, &kp EXCL)
 
+// Tap: pipe | Shift + tap: amps.
+SIMPLE_MORPH(pipeamps, SFT, &kp PIPE, &kp AMPS)
+
+// Tap: percent | Shift + tap: at.
+SIMPLE_MORPH(prcntat, SFT, &kp PRCNT, &kp AT)
+
 // Tap: left/right parenthesis | Shft + tap: less-than/greater-than.
 SIMPLE_MORPH(lpar_lt, SFT, &kp LPAR, &kp LT)
 SIMPLE_MORPH(rpar_gt, SFT, &kp RPAR, &kp GT)
