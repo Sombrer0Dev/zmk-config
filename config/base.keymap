@@ -95,25 +95,12 @@ ZMK_HOLD_TAP(mt_end, bindings = <&masked_end>, <&kp>; MT_CORE)
 MASK_MODS(masked_home, (MOD_LCTL), &kp HOME)
 MASK_MODS(masked_end,  (MOD_LCTL), &kp END)
 
-
-/* Magic-shift & auto-layers */
-
-// Tap: repeat after alpha, else sticky-shift |
-// Shift + tap/ double-tap: caps-word | Hold: shift.
-#define MAGIC_SHIFT &magic_shift LSHFT 0
-ZMK_HOLD_TAP(magic_shift, bindings = <&kp>, <&magic_shift_tap>;
-             flavor = "balanced"; tapping-term-ms = <200>;
-             quick-tap-ms = <QUICK_TAP_MS>;)
-ZMK_MOD_MORPH(magic_shift_tap, bindings = <&shift_repeat>, <&caps_word>;
-              mods = <(MOD_LSFT)>;)
-ZMK_ADAPTIVE_KEY(
-    shift_repeat, bindings = <&sk LSHFT>;
-    repeat {
-      trigger-keys = <A B C D E F G H I J K L M N O P Q R S T U V W X Y Z>;
-      bindings = <&key_repeat>;
-      max-prior-idle-ms = <300>;
-      strict-modifiers;
-    };)
+/* Auto-layers */
+// Tap: sticky-shift | Shift + tap/ double-tap: caps-word | Hold: shift.
+ZMK_MOD_MORPH(smart_shft,
+  bindings = <&sk RSHFT>, <&caps_word>;
+  mods = <(MOD_RSFT)>;
+)
 
 &caps_word { // Mods deactivate caps-word, requires PR #1451. [TODO: rebase]
   /delete-property/ ignore-modifiers;
@@ -197,7 +184,7 @@ ZMK_BASE_LAYER(Base,
 //┏━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┓
    &kp ESC       &kp Z         &kp X         &kp C         &kp D         &kp V        ,    &kp K         &kp H         &kp COMMA     &kp DOT       &qexcl        &kp SQT      ,
 //┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
-                                             &rus          &lt_spc NAV 0 &lt FN TAB   ,    SMART_NUM     MAGIC_SHIFT   CANCEL
+                                             &rus          &lt_spc NAV 0 &lt FN TAB   ,    SMART_NUM     &smart_shft   CANCEL
 //                                          ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
 )
 
@@ -209,7 +196,7 @@ ZMK_BASE_LAYER(Rus,
 //┏━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┓
    &kp ESC       &kp Z         &kp X         &kp C         &kp V         &kp B        ,    &kp N         &kp M         &kp COMMA     &kp DOT       &kp SLASH     &kp SQT      ,
 //┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
-                                             &rus          &lt_spc NAV 0 &lt FN TAB   ,    SMART_NUM     MAGIC_SHIFT   CANCEL
+                                             &rus          &lt_spc NAV 0 &lt FN TAB   ,    SMART_NUM     &smart_shft   CANCEL
 //                                          ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
 )
 
