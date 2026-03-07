@@ -80,8 +80,6 @@ MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS) // Right-hand HRMs.
 
 ZMK_HOLD_TAP(mt_home, bindings = <&masked_home>, <&kp>; MT_CORE)
 ZMK_HOLD_TAP(mt_end,  bindings = <&masked_end>,  <&kp>; MT_CORE)
-ZMK_HOLD_TAP(mt_pgup, bindings = <&masked_pgup>, <&kp>; MT_CORE)
-ZMK_HOLD_TAP(mt_pgdn, bindings = <&masked_pgdn>, <&kp>; MT_CORE)
 
 #define NAV_LEFT  &mt_home 0   LEFT  // Tap: left  | Long-tap: start of line.
 #define NAV_RIGHT &mt_end 0    RIGHT // Tap: right | Long-tap: end   of line.
@@ -90,19 +88,12 @@ ZMK_HOLD_TAP(mt_pgdn, bindings = <&masked_pgdn>, <&kp>; MT_CORE)
 #define NAV_BSPC  &mt LC(BSPC) BSPC  // Tap: bspc  | Long-tap: delete word bwd.
 #define NAV_DEL   &mt LC(DEL)  DEL   // Tap: del   | Long-tap: delete word fwd.
 
-#define WIN_LEFT  &mt_home 0   LC(LS(LA(LG(LEFT))))  // Tap: left  | Long-tap: start of line.
-#define WIN_RIGHT &mt_end 0    LC(LS(LA(LG(RIGHT)))) // Tap: right | Long-tap: end   of line.
-#define WIN_UP    &mt_pgup 0   LC(LS(LA(LG(UP))))    // Tap: up    | Long-tap: start of doc.
-#define WIN_DOWN  &mt_pgdn 0   LC(LS(LA(LG(DOWN))))  // Tap: down  | Long-tap: end   of doc.
-
 // Mask CTRL on left/right hold to avoid accidental jumps to start/end of doc.
 #define MASK_MODS(NAME, MODS, BINDING)                                         \
   ZMK_MOD_MORPH(NAME, bindings = <BINDING>, <BINDING>; mods = <MODS>;)
 
 MASK_MODS(masked_home, (MOD_LCTL), &kp HOME)
 MASK_MODS(masked_end,  (MOD_LCTL), &kp END)
-MASK_MODS(masked_pgup, (MOD_LCTL), &kp PG_UP)
-MASK_MODS(masked_pgdn, (MOD_LCTL), &kp PG_DN)
 /* Auto-layers */
 // Tap: sticky-shift | Shift + tap/ double-tap: caps-word | Hold: shift.
 ZMK_MOD_MORPH(smart_shft,
@@ -164,7 +155,7 @@ ZMK_MOD_MORPH(bs_del, bindings = <&kp BSPC>, <&kp DEL>;
               mods = <(MOD_LSFT|MOD_RSFT)>; keep-mods = <MOD_RSFT>;)
 
 // Tap: copy | double-tap: cut.
-ZMK_TAP_DANCE(copy_cut, bindings = <&kp LC(INS)>, <&kp LC(X)>;
+ZMK_TAP_DANCE(shft_ctrl, bindings = <&kt LSHFT>, <&kt LCTRL>;
               tapping-term-ms = <200>;)
 
 // Misc aliases. [TODO: clean up]
@@ -223,13 +214,13 @@ ZMK_BASE_LAYER(Nav,
 
 ZMK_BASE_LAYER(Fn,
 //              ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
-                 ___           ___           ___           ___           ___          ,    &kp F1        &kp F2        &kp F3        &kp F4        &kp F5       ,
+                 &kp LG(Q)     &kp LG(W)     &kp LG(F)     &kp LG(P)     &kp LG(B)    ,    &kp F1        &kp F2        &kp F3        &kp F4        &kp F5       ,
 //              ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫
-                 &hml LGUI F1  &hml LALT F2  &hml LCTRL F3 &hml LSHFT F4 &kp F5       ,    &kp F6        &hmr RSHFT F7 &hmr RCTRL F8 &hmr RALT F9  &hmr RGUI F10,
+            &hml LGUI LG(A) &hml LALT LG(R)  &hml LCTRL LG(S) &hml LSHFT LG(T) &kp LG(G),  &kp F6        &hmr RSHFT F7 &hmr RCTRL F8 &hmr RALT F9  &hmr RGUI F10,
 //┏━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┓
-   ___           WIN_LEFT      WIN_DOWN      WIN_UP        WIN_RIGHT     ___          ,    ___           &kp F11       &F12          ___           ___           ___          ,
+   &shft_ctrl    &kp LG(LEFT)  &kp LG(UP)    &kp LG(DOWN)  &kp LG(RIGHT) &kp LG(V)    ,    ___           &kp F11       &F12          ___           ___           ___          ,
 //┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
-                                             XXX           ___           ___          ,    &kp C_MUTE    &kp C_PP      ___
+                                             XXX           ___           ___          ,    ___           ___           ___
 //                                          ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
 )
 
