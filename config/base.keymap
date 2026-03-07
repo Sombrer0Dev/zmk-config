@@ -79,7 +79,9 @@ MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS) // Right-hand HRMs.
 &mt { MT_CORE };
 
 ZMK_HOLD_TAP(mt_home, bindings = <&masked_home>, <&kp>; MT_CORE)
-ZMK_HOLD_TAP(mt_end, bindings = <&masked_end>, <&kp>; MT_CORE)
+ZMK_HOLD_TAP(mt_end,  bindings = <&masked_end>,  <&kp>; MT_CORE)
+ZMK_HOLD_TAP(mt_pgup, bindings = <&masked_pgup>, <&kp>; MT_CORE)
+ZMK_HOLD_TAP(mt_pgdn, bindings = <&masked_pgdn>, <&kp>; MT_CORE)
 
 #define NAV_LEFT  &mt_home 0   LEFT  // Tap: left  | Long-tap: start of line.
 #define NAV_RIGHT &mt_end 0    RIGHT // Tap: right | Long-tap: end   of line.
@@ -88,13 +90,19 @@ ZMK_HOLD_TAP(mt_end, bindings = <&masked_end>, <&kp>; MT_CORE)
 #define NAV_BSPC  &mt LC(BSPC) BSPC  // Tap: bspc  | Long-tap: delete word bwd.
 #define NAV_DEL   &mt LC(DEL)  DEL   // Tap: del   | Long-tap: delete word fwd.
 
+#define WIN_LEFT  &mt_home 0   LC(LS(LA(LG(LEFT))))  // Tap: left  | Long-tap: start of line.
+#define WIN_RIGHT &mt_end 0    LC(LS(LA(LG(RIGHT)))) // Tap: right | Long-tap: end   of line.
+#define WIN_UP    &mt_pgup 0   LC(LS(LA(LG(UP))))    // Tap: up    | Long-tap: start of doc.
+#define WIN_DOWN  &mt_pgdn 0   LC(LS(LA(LG(DOWN))))  // Tap: down  | Long-tap: end   of doc.
+
 // Mask CTRL on left/right hold to avoid accidental jumps to start/end of doc.
 #define MASK_MODS(NAME, MODS, BINDING)                                         \
   ZMK_MOD_MORPH(NAME, bindings = <BINDING>, <BINDING>; mods = <MODS>;)
 
 MASK_MODS(masked_home, (MOD_LCTL), &kp HOME)
 MASK_MODS(masked_end,  (MOD_LCTL), &kp END)
-
+MASK_MODS(masked_pgup, (MOD_LCTL), &kp PG_UP)
+MASK_MODS(masked_pgdn, (MOD_LCTL), &kp PG_DN)
 /* Auto-layers */
 // Tap: sticky-shift | Shift + tap/ double-tap: caps-word | Hold: shift.
 ZMK_MOD_MORPH(smart_shft,
@@ -215,11 +223,11 @@ ZMK_BASE_LAYER(Nav,
 
 ZMK_BASE_LAYER(Fn,
 //              ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
-                 ___           ___           ___           ___           ___          ,    &kp C_PREV    &kp C_VOL_UP  VOL_DOWN      &kp C_NEXT    ___          ,
+                 ___           ___           ___           ___           ___          ,    &kp F1        &kp F2        &kp F3        &kp F4        &kp F5       ,
 //              ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫
                  &hml LGUI F1  &hml LALT F2  &hml LCTRL F3 &hml LSHFT F4 &kp F5       ,    &kp F6        &hmr RSHFT F7 &hmr RCTRL F8 &hmr RALT F9  &hmr RGUI F10,
 //┏━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┓
-   ___           ___           ___           ___           &kp F11       ___          ,    ___           &kp F12       DSK_MGR       ___           ___           ___          ,
+   ___           WIN_LEFT      WIN_DOWN      WIN_UP        WIN_RIGHT     ___          ,    ___           &kp F11       &F12          ___           ___           ___          ,
 //┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
                                              XXX           ___           ___          ,    &kp C_MUTE    &kp C_PP      ___
 //                                          ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
