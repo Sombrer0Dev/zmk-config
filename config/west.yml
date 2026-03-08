@@ -6,19 +6,33 @@ manifest:
       url-base: https://github.com/caksoylar
     - name: urob
       url-base: https://github.com/urob
+
   projects:
     - name: zmk
       remote: zmkfirmware
-      revision: main
       import: app/west.yml
+      revision: v0.3.0
+
     - name: zmk-rgbled-widget
       remote: caksoylar
-      revision: main
+      revision: v0.3
+
     - name: zmk-helpers
       remote: urob
-      revision: main
+      path: modules/zmk/helpers
+      revision: v0.3
     - name: zmk-auto-layer
       remote: urob
-      revision: main # set to same version as zmk
+      path: modules/zmk/auto-layer
+      revision: v0.3
+    - name: zmk-adaptive-key
+      remote: urob
+      path: modules/zmk/adaptive-key
+      revision: v0.3
+    - name: zmk-tri-state
+      remote: urob
+      path: modules/zmk/tri-stat
+      revision: v0.3
+
   self:
     path: config
