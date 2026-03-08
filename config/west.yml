@@ -6,8 +6,6 @@ manifest:
       url-base: https://github.com/caksoylar
     - name: urob
       url-base: https://github.com/urob
-    - name: dhruvinsh
-      url-base: https://github.com/dhruvinsh
 
   projects:
     - name: zmk
@@ -18,8 +16,6 @@ manifest:
     - name: zmk-rgbled-widget
       remote: caksoylar
       revision: v0.3
-    - name: zmk-tri-state
-      remote: dhruvinsh
 
     - name: zmk-helpers
       remote: urob
@@ -30,6 +26,24 @@ manifest:
     - name: zmk-adaptive-key
       remote: urob
       path: modules/zmk/adaptive-key
+    - name: zmk-tri-state
+      remote: urob
+      path: modules/zmk/tri-stat
+
+    # Only source necessary Zephyr modules. Remove this entire section to restore
+    # the default (needed for less common hardware).
+    - name: zephyr
+      remote: zmkfirmware
+      revision: v3.5.0+zmk-fixes
+      clone-depth: 1
+      import:
+        name-allowlist:
+          - cmsis
+          - hal_nordic
+          - hal_rpi_pico
+          - hal_stm32
+          - lvgl
+          - tinycrypte
 
   self:
     path: config
