@@ -22,10 +22,13 @@ manifest:
       remote: dhruvinsh
 
     - name: zmk-helpers
+      remote: urob
       path: modules/zmk/helpers
     - name: zmk-auto-layer
+      remote: urob
       path: modules/zmk/auto-layer
     - name: zmk-adaptive-key
+      remote: urob
       path: modules/zmk/adaptive-key
 
   self:
