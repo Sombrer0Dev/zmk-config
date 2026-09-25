@@ -1,0 +1,10 @@
+.build
+.direnv
+.west
+modules
+firmware
+zephyr
+zmk
+zmk-rgbled-widget
+draw/base.yaml
+draw/overview.yaml
