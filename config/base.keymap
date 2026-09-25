@@ -154,8 +154,8 @@ ZMK_MACRO(dot_spc, bindings = <&kp DOT &kp SPACE &sk LSHFT>; wait-ms = <0>;
 ZMK_MOD_MORPH(bs_del, bindings = <&kp BSPC>, <&kp DEL>;
               mods = <(MOD_LSFT|MOD_RSFT)>; keep-mods = <MOD_RSFT>;)
 
-// Tap: copy | double-tap: cut.
-ZMK_TAP_DANCE(shft_ctrl, bindings = <&kt LSHFT>, <&kt LCTRL>;
+// Tap: shift | double-tap: ctrl.
+ZMK_TAP_DANCE(shft_ctrl, bindings = <&sk LSHFT>, <&sk LCTRL>;
               tapping-term-ms = <200>;)
 
 // Misc aliases. [TODO: clean up]
